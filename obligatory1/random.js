@@ -43,7 +43,9 @@ while (citiesLeftToVisit.length > 0) {
   nextCity = citiesLeftToVisit[nextCityIndex];
   costOfTravel += nextCity.connections[currentCity.id]; // Add the cost of the connection
   currentCity = nextCity;
-  citiesVisited.push(citiesLeftToVisit.splice(nextCityIndex, 1)); // Remove the city from the array and add to visited
+  citiesVisited.push(citiesLeftToVisit.splice(nextCityIndex, 1)[0]); // Remove the city from the array and add to visited
 }
 
 console.log("Cost of travel", costOfTravel);
+console.log(citiesVisited)
+console.log(citiesVisited.length)
