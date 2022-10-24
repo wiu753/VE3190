@@ -1,5 +1,5 @@
 let citiesLeftToVisit = [];
-let numberOfCities = 50;
+let numberOfCities = 4;
 let citiesVisited = [];
 let costOfTravel = 0;
 
@@ -36,7 +36,7 @@ for (let i = 0; i < numberOfCities; i++) {
 // Pick a random city to start in
 let currentCityIndex = randomIntFromInterval(0, citiesLeftToVisit.length - 1); // Add -1 because length is 1 more
 let currentCity = citiesLeftToVisit[currentCityIndex];
-citiesVisited.push(citiesLeftToVisit.splice(currentCityIndex, 1));
+citiesVisited.push(citiesLeftToVisit.splice(currentCityIndex, 1)[0]);
 
 while (citiesLeftToVisit.length > 0) {
   nextCityIndex = randomIntFromInterval(0, citiesLeftToVisit.length - 1); // Pick a random city
@@ -47,5 +47,7 @@ while (citiesLeftToVisit.length > 0) {
 }
 
 console.log("Cost of travel", costOfTravel);
+// console.log(citiesVisited)
+// console.log(citiesVisited.length)
+
 console.log(citiesVisited)
-console.log(citiesVisited.length)
