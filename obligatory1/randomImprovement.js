@@ -1,5 +1,5 @@
 let citiesLeftToVisit = [];
-let numberOfCities = 4;
+let numberOfCities = 500;
 let citiesVisited = [];
 let costOfTravel = 0;
 
@@ -48,11 +48,11 @@ while (citiesLeftToVisit.length > 0) {
   citiesVisited.push(citiesLeftToVisit.splice(nextCityIndex, 1)[0]); // Remove the city from the array and add to visited
 }
 
-console.log("Cost of travel", costOfTravel);
+// console.log("Cost of travel", costOfTravel);
 // console.log(citiesVisited)
 // console.log(citiesVisited.length)
 
-console.log(citiesVisited)
+// console.log(citiesVisited)
 
 let calculateCost = (tour) => {
     let prev
@@ -80,9 +80,9 @@ while (running < 5000) {
     copy[firstRandomCity] = copy[secondRandomCity]
     copy[secondRandomCity] = temp
     if (calculateCost(copy) < costOfTravel) {
-        console.log("Current cost", costOfTravel)
+        // console.log("Current cost", costOfTravel)
         costOfTravel = calculateCost(tour)
-        console.log("New cost", costOfTravel)
+        // console.log("New cost", costOfTravel)
         tour = copy
     }
     running++

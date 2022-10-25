@@ -79,4 +79,38 @@ while (outerLoopCopy.length > 0) {
 // console.log("all scores:", scores)
 // console.log("The best score: ", bestScore)
 
+let calculateCost = (tour) => {
+  let prev
+  let current
+  let cost = 0
+
+  for (let i = 1; i < tour.length; i++) {
+      prev = tour[i - 1].id
+      current = tour[i]
+      cost += current.connections[prev]
+  }
+
+  return cost
+}
+
+let running = 0
+
+while (running < 5000) {
+    let temp = null
+    let firstRandomCity = randomIntFromInterval(0, bestTour.length - 1)
+    let secondRandomCity = randomIntFromInterval(0, bestTour.length - 1)
+    let copy = [...bestTour]
+
+    temp = copy[firstRandomCity]
+    copy[firstRandomCity] = copy[secondRandomCity]
+    copy[secondRandomCity] = temp
+    if (calculateCost(copy) < bestScore) {
+        // console.log("Current cost", bestScore)
+        bestScore = calculateCost(bestTour)
+        // console.log("New cost", bestScore)
+        bestTour = [...copy]
+    }
+    running++
+}
+
 console.log(bestScore)
