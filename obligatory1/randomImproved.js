@@ -6,8 +6,8 @@ let amount = 500,
     greedyIterations = 5000,
     greedyCount = 0
 
-// Pick a random number (min and max is inclusive)
-let randomIntFromInterval = (min, max) => {
+// Pick a random number, min and max is inclusive
+    let randomIntFromInterval = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
@@ -84,7 +84,7 @@ while (greedyCount < greedyIterations) {
         cost = calculateCost(tour)
         tour = temp
     }
-    
+
     greedyCount++
 }
 

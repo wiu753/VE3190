@@ -14,9 +14,9 @@ let randomIntFromInterval = (min, max) => {
 
 // Calculate the cost of a tour
 let calculateCost = (tour) => {
-    let prev
-    let current
-    let cost = 0
+    let prev,
+        current,
+        cost = 0
 
     for (let i = 1; i < tour.length; i++) {
         prev = tour[i - 1].id

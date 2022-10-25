@@ -73,4 +73,4 @@ while (copy.length > 0) {
 }
 
 console.log(scores)
-console.log(bestScore)
+console.log("", bestScore)
