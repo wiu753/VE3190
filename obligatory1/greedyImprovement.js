@@ -40,13 +40,12 @@ let cheapestCity = null
 // Choose a random city
 let currentCity = cities[randomIntFromInterval(0, cities.length - 1)]
 
-
 currentCity.visited = true
 citiesVisited++
 console.log("First random city is", currentCity)
 let tour = [currentCity]
 
-while (citiesVisited < nodes) {
+while (citiesVisited < nodes) { 
     let index = currentCity.id
 
     // Find the cheapest connection
@@ -67,7 +66,7 @@ while (citiesVisited < nodes) {
             " with a cost of " +
             cheapest
     )
-    
+
     tour.push(cheapestCity)
     cheapestCity.visited = true
     citiesVisited++
@@ -83,26 +82,49 @@ console.log("All cities: ", cities)
 console.log("The total cost: ", cost)
 console.log(tour)
 
-// let a = [
-//     { id: 1, connections: [ 1, -1, 7, 5, 5, 7 ], visited: true },
-//     { id: 0, connections: [ -1, 1, 1, 3, 8, 3 ], visited: true },
-//     { id: 2, connections: [ 1, 7, -1, 7, 9, 2 ], visited: true },
-//     { id: 5, connections: [ 3, 7, 2, 1, 9, -1 ], visited: true },
-//     { id: 3, connections: [ 3, 5, 7, -1, 4, 1 ], visited: true },
-//     { id: 4, connections: [ 8, 5, 9, 4, -1, 9 ], visited: true },
+let calculateCost = (tour) => {
+    let prev
+    let current
+    let cost = 0
 
-//     1 + 1  + 2 + 1 + 4 = 9
+    for (let i = 1; i < tour.length; i++) {
+        prev = tour[i - 1].id
+        current = tour[i]
+        cost += current.connections[prev]
+    }
 
-//     { id: 5, connections: [ 3, 7, 2, 1, 9, -1 ], visited: true },
-//     { id: 0, connections: [ -1, 1, 1, 3, 8, 3 ], visited: true },
-//     { id: 2, connections: [ 1, 7, -1, 7, 9, 2 ], visited: true },
-//     { id: 1, connections: [ 1, -1, 7, 5, 5, 7 ], visited: true },
-//     { id: 3, connections: [ 3, 5, 7, -1, 4, 1 ], visited: true },
-//     { id: 4, connections: [ 8, 5, 9, 4, -1, 9 ], visited: true }
+    return cost
+}
 
-//     3 + 1 + 7 + 5 + 4 = 20
-// ]
+let running = 0
 
-// prev = 4
-// curr = 1
-// cost = 1 + 2 + 5 + 3 = 11
+while (running < 5000) {
+    let temp = null
+    let firstRandomCity = randomIntFromInterval(0, tour.length - 1)
+    let secondRandomCity = randomIntFromInterval(0, tour.length - 1)
+    let copy = [...tour]
+
+    
+    temp = copy[firstRandomCity]
+    copy[firstRandomCity] = copy[secondRandomCity]
+    copy[secondRandomCity] = temp
+    if (calculateCost(copy) < cost) {
+        console.log("Current cost", cost)
+        cost = calculateCost(tour)
+        console.log("New cost", cost)
+        tour = copy
+    }
+    running++
+}
+
+// Something funky about the cost calculation, it's not working properly
+
+console.log(cost)
+// Choose two random cities in my tour
+// Literally swap their locoation in the tour array
+// if (calculateCost(tour) < initialCost) {
+//     // Swap the cities
+// else just keep the tour as it is
+// Stop after 10 seconds
+
+// console.log(calculateCost(tour))
