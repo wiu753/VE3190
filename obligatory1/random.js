@@ -1,7 +1,7 @@
 let cities = [],
     tour = [],
-    trail = []
-let amount = 500,
+    trail = [],
+    amount = 500,
     cost = 0
 
 // Pick a random number, min and max is inclusive
@@ -49,6 +49,6 @@ while (cities.length > 0) {
     tour.push(cities.splice(nextIndex, 1)[0])
 }
 
-console.log("The tour: ", tour)
-console.log("The trail: ", trail)
+// console.log("The tour: ", tour)
+// console.log("The trail: ", trail)
 console.log("Cost of travel: ", cost)

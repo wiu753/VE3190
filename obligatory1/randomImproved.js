@@ -1,7 +1,7 @@
 let cities = [],
     tour = [],
     trail = []
-let amount = 10,
+let amount = 500,
     cost = 0,
     greedyIterations = 5000,
     greedyCount = 0
@@ -43,7 +43,7 @@ for (let i = 0; i < amount; i++) {
 // Loop over all the cities and their connections to set a random cost
 for (let i = 0; i < amount; i++) {
     for (let j = 0; j < amount; j++) {
-        // Check that we are not updating a link to the same city and that we only update cities once (not override)
+        // Update all connections that are -1 and not a connection to itself
         if (cities[i].connections[j] == -1 && i !== j) {
             let random = Math.floor(Math.random() * 9 + 1)
             cities[i].connections[j] = cities[j].connections[i] = random
@@ -66,7 +66,7 @@ while (cities.length > 0) {
     tour.push(cities.splice(nextCityIndex, 1)[0])
 }
 
-console.log("The cost trail: ", trail)
+// console.log("The cost trail: ", trail)
 console.log("Initial cost of tour: ", cost)
 
 // Greedy improvement algorithm
@@ -84,7 +84,8 @@ while (greedyCount < greedyIterations) {
         cost = calculateCost(tour)
         tour = temp
     }
+    
     greedyCount++
 }
 
-console.log("Cost of tour after greedy improvement heuristic", cost)
+console.log("Cost of tour after greedy improvement heuristic:", cost)
