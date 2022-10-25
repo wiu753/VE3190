@@ -7,7 +7,7 @@ let amount = 500,
     greedyCount = 0
 
 // Pick a random number, min and max is inclusive
-    let randomIntFromInterval = (min, max) => {
+let randomIntFromInterval = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
