@@ -1,7 +1,7 @@
 let cities = [],
     tour = [],
     trail = []
-let amount = 500,
+let amount = 50,
     cost = 0,
     greedyIterations = 5000,
     greedyCount = 0

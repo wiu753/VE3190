@@ -1,5 +1,5 @@
 let cities = [],
-    numberOfCities = 50,
+    numberOfCities = 500,
     tour = [],
     cost = 0,
     scores = [],
@@ -72,5 +72,5 @@ while (copy.length > 0) {
     cost = 0
 }
 
-console.log(scores)
-console.log("", bestScore)
+// console.log(scores)
+console.log("Cost of tour:", bestScore)

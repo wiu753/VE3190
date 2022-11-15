@@ -1,5 +1,5 @@
 let cities = [],
-    numberOfCities = 50,
+    numberOfCities = 500,
     tour = [],
     cost = 0,
     scores = [],

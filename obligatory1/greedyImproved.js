@@ -1,4 +1,4 @@
-let amount = 50,
+let amount = 500,
     cities = [],
     cost = 0,
     count = 0,
