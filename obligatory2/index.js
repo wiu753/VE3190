@@ -52,18 +52,31 @@ let generateIndividual = (graph) => {
     return newGraph
 }
 
-// Calculate the fitness of an individual
-let calculateFitness = (individual) => {
-    let fitness = 0
-    for (let i = 0; i < individual.length; i++) {
-        for (let j = 0; j < individual[i].connections.length; j++) {
-            if (
-                individual[i].color !==
-                individual[individual[i].connections[j]].color
-            ) {
-                fitness++
+// Generate a population
+let generatePopulation = (graph, size) => {
+    let population = []
+    for (let i = 0; i < size; i++) {
+        population.push(generateIndividual(graph))
+    }
+    return population
+}
+
+// Calculate the fitness for each individual in a population
+let calculateFitness = (population) => {
+    let fitness = []
+    for (let i = 0; i < population.length; i++) {
+        let individualFitness = 0
+        for (let j = 0; j < population[i].length; j++) {
+            for (let k = 0; k < population[i][j].connections.length; k++) {
+                if (
+                    population[i][j].color !==
+                    population[i][population[i][j].connections[k]].color
+                ) {
+                    individualFitness++
+                }
             }
         }
+        fitness.push(individualFitness)
     }
     return fitness
 }
@@ -91,10 +104,22 @@ let reproduce = (population) => {
         let parent1 = population[i]
         let parent2 = population[(i + 1) % population.length]
         let children = crossover(parent1, parent2)
-        console.log("parent1:", parent1.map((node, index) => ([index, node.color])))
-        console.log("parent2:", parent2.map((node, index) => ([index, node.color])))
-        console.log("child1: ", children[0].map((node, index) => ([index, node.color])))
-        console.log("child2: ", children[1].map((node, index) => ([index, node.color])))
+        console.log(
+            "parent1:",
+            parent1.map((node, index) => [index, node.color])
+        )
+        console.log(
+            "parent2:",
+            parent2.map((node, index) => [index, node.color])
+        )
+        console.log(
+            "child1: ",
+            children[0].map((node, index) => [index, node.color])
+        )
+        console.log(
+            "child2: ",
+            children[1].map((node, index) => [index, node.color])
+        )
         newPopulation.push(children[0])
         newPopulation.push(children[1])
     }
@@ -117,29 +142,22 @@ let mutate = (population, probability) => {
     return newPopulation
 }
 
+let graphSize = 10
+let populationSize = 10
+
+let graph = generateGraph(graphSize)
+let population = generatePopulation(graph, populationSize)
+let fitnessPopulation = calculateFitness(population)
+
+console.log("Population:", population)
+console.log("Fitness:", fitnessPopulation)
+
+let newPopulation = reproduce(population)
+let fitnessNewPopulation = calculateFitness(newPopulation)
+
+console.log("New Population:", newPopulation)
+console.log("Fitness kids:", fitnessNewPopulation)
 
 // let graphSizes = [100, 500, 1000]
 // let populationSizes = [10, 20, 40, 60]
 // let mutationProbabilities = [0.1, 0.3, 0.5, 0.7, 0.9]
-
-let graph = generateGraph(10)
-let population = []
-let fitnessParents = []
-let fitnessChildren = []
-
-for (let i = 0; i < 10; i++) {
-    population.push(generateIndividual(graph))
-    fitnessParents.push(calculateFitness(population[i]))
-}
-
-let newPopulation = reproduce(population)
-
-for (let i = 0; i < 10; i++) {
-    fitnessChildren.push(calculateFitness(newPopulation[i]))
-}
-
-
-// console.log("Reproduce:", newPopulation)
-// console.log("Mutate:", mutate(population, 0.9))
-console.log("Fitness of parents:", fitnessParents)
-console.log("Fitness of children:", fitnessChildren)
