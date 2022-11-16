@@ -1,9 +1,3 @@
-// 1. The size of the graphs should be: 100, 500, and 1000
-// 2. They should have one of three colors
-// 3. Should have 10, 20, 40, and 60 starting population sizes
-// 4. Use two point crossover, pick two points and and swap everything in betweeen
-// 5. The probability of mutating a new child should be 0.1, 0.3, 0.5, 0.7, and 0.9
-
 // Return a random color
 let randomColor = () => {
     let colors = ["red", "green", "blue"]
@@ -104,22 +98,6 @@ let reproduce = (population) => {
         let parent1 = population[i]
         let parent2 = population[(i + 1) % population.length]
         let children = crossover(parent1, parent2)
-        // console.log(
-        //     "parent1:",
-        //     parent1.map((node, index) => [index, node.color])
-        // )
-        // console.log(
-        //     "parent2:",
-        //     parent2.map((node, index) => [index, node.color])
-        // )
-        // console.log(
-        //     "child1: ",
-        //     children[0].map((node, index) => [index, node.color])
-        // )
-        // console.log(
-        //     "child2: ",
-        //     children[1].map((node, index) => [index, node.color])
-        // )
         newPopulation.push(children[0])
         newPopulation.push(children[1])
     }
@@ -156,35 +134,31 @@ let removeLowestFitness = (population) => {
     return newPopulation
 }
 
-let graphSize = 10
-let populationSize = 10
-let mutationProbability = 0.5
+// Find the best individual in a population
+let findBestIndividual = (population) => {
+    let fitness = calculateFitness(population)
+    let maxIndex = fitness.indexOf(Math.max(...fitness))
+    console.log("Max Index", maxIndex)
+    return population[maxIndex]
+}
 
+let graphSize = 1000
+let populationSize = 60
+let mutationProbability = 0.1
+let stopCondition = 10
+
+// Driver code
 let graph = generateGraph(graphSize)
 let population = generatePopulation(graph, populationSize)
-let fitnessPopulation = calculateFitness(population)
 
-// console.log("Population:", population)
-console.log("Fitness parents:", fitnessPopulation)
+for (let i = 0; i < stopCondition; i++) {
+    let newPopulation = reproduce(population)
+    newPopulation = mutate(newPopulation, mutationProbability)
+    population.push(...newPopulation)
+    population = removeLowestFitness(population)
+}
 
-let newPopulation = reproduce(population)
-let fitnessNewPopulation = calculateFitness(newPopulation)
-// console.log("New Population:", newPopulation)
-console.log("Fitness kids:", fitnessNewPopulation)
-
-newPopulation = mutate(newPopulation, mutationProbability)
-fitnessNewPopulation = calculateFitness(newPopulation)
-
-// console.log("New Population after mutate:", newPopulation)
-console.log("Fitness kids after mutate:", fitnessNewPopulation)
-
-
-population.push(...newPopulation)
-let fitPopulation = removeLowestFitness(population)
-// population = removeLowestFitness(population)
-console.log("Fitness after remove:", calculateFitness(fitPopulation).sort())
-// console.log(population)
-
+console.log(calculateFitness(population)[0])
 
 // let graphSizes = [100, 500, 1000]
 // let populationSizes = [10, 20, 40, 60]
