@@ -1,24 +1,14 @@
-// Notes
-// Use pure functions
-
-// Instructions
 // 1. The size of the graphs should be: 100, 500, and 1000
 // 2. They should have one of three colors
-//  2.1 The colors should be: red, green, and blue
 // 3. Should have 10, 20, 40, and 60 starting population sizes
 // 4. Use two point crossover, pick two points and and swap everything in betweeen
 // 5. The probability of mutating a new child should be 0.1, 0.3, 0.5, 0.7, and 0.9
-
-let test = true
-test ? console.log("------------ BEGIN TEST ------------") : null
 
 // Return a random color
 let randomColor = () => {
     let colors = ["red", "green", "blue"]
     return colors[Math.floor(Math.random() * colors.length)]
 }
-
-test ? console.log("Random color:", randomColor()) : null
 
 // Return a random graph with random number of connections
 let generateGraph = (size) => {
@@ -52,9 +42,6 @@ let generateGraph = (size) => {
     return graph
 }
 
-let testGraph = generateGraph(5)
-test ? console.log("Graph:", testGraph) : null
-
 // Generate one individual
 let generateIndividual = (graph) => {
     // Force a deep copy
@@ -63,16 +50,6 @@ let generateIndividual = (graph) => {
         newGraph[i].color = randomColor()
     }
     return newGraph
-}
-
-let individualOne = generateIndividual(testGraph)
-let individualTwo = generateIndividual(testGraph)
-let individualThree = generateIndividual(testGraph)
-
-if (test) {
-    console.log("Individual 1", individualOne)
-    console.log("Individual 2", individualTwo)
-    console.log("Individual 3", individualThree)
 }
 
 // Calculate the fitness of an individual
@@ -91,10 +68,62 @@ let calculateFitness = (individual) => {
     return fitness
 }
 
-if (test) {
-    console.log("Fitness 1:", calculateFitness(individualOne))
-    console.log("Fitness 2:", calculateFitness(individualTwo))
-    console.log("Fitness 3:", calculateFitness(individualThree))
+// Crossover two parents and make two children
+let crossover = (parent1, parent2) => {
+    let child1 = JSON.parse(JSON.stringify(parent1))
+    let child2 = JSON.parse(JSON.stringify(parent2))
+    let point1 = Math.floor(Math.random() * parent1.length)
+    let point2 = Math.floor(Math.random() * parent1.length)
+    let start = Math.min(point1, point2)
+    let end = Math.max(point1, point2)
+    console.log("start: ", start, "end: ", end - 1)
+    for (let i = start; i < end; i++) {
+        child1[i].color = parent2[i].color
+        child2[i].color = parent1[i].color
+    }
+    return [child1, child2]
 }
 
-test ? console.log("------------ END TEST ------------") : null
+// Reproduce each individual with the next individual
+let reproduce = (population) => {
+    let newPopulation = []
+    for (let i = 0; i < population.length; i++) {
+        let parent1 = population[i]
+        let parent2 = population[(i + 1) % population.length]
+        let child = crossover(parent1, parent2)
+        console.log("parent1:", parent1.map((node, index) => ([index, node.color])))
+        console.log("parent2:", parent2.map((node, index) => ([index, node.color])))
+        console.log("child1: ", child[0].map((node, index) => ([index, node.color])))
+        console.log("child2: ", child[1].map((node, index) => ([index, node.color])))
+        newPopulation.push(child[0])
+        newPopulation.push(child[1])
+    }
+    return newPopulation
+}
+
+
+
+let graphSizes = [100, 500, 1000]
+let populationSizes = [10, 20, 40, 60]
+let mutationProbabilities = [0.1, 0.3, 0.5, 0.7, 0.9]
+
+let graph = generateGraph(10)
+let population = []
+let fitness = []
+
+for (let i = 0; i < 10; i++) {
+    population.push(generateIndividual(graph))
+    fitness.push(calculateFitness(population[i]))
+}
+
+// console.log("Graph:", graph)
+// console.log("Population:", population)
+// console.log("Fitness:", fitness)
+// console.log("Reproduce:", reproduce(population))
+reproduce(population)
+
+// Loop over all children and mutate them
+
+// For each pair of parents, do the crossover and mutation, add those into new population
+// Then do a check of fitness on the population and remove the worst individuals (half)
+
