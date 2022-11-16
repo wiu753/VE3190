@@ -76,7 +76,7 @@ let crossover = (parent1, parent2) => {
     let point2 = Math.floor(Math.random() * parent1.length)
     let start = Math.min(point1, point2)
     let end = Math.max(point1, point2)
-    // console.log("start: ", start, "end: ", end - 1)
+    console.log("start: ", start, "end: ", end - 1)
     for (let i = start; i < end; i++) {
         child1[i].color = parent2[i].color
         child2[i].color = parent1[i].color
@@ -87,16 +87,16 @@ let crossover = (parent1, parent2) => {
 // Reproduce each individual with the next individual
 let reproduce = (population) => {
     let newPopulation = []
-    for (let i = 0; i < population.length; i++) {
+    for (let i = 0; i < population.length / 2; i++) {
         let parent1 = population[i]
         let parent2 = population[(i + 1) % population.length]
-        let child = crossover(parent1, parent2)
-        // console.log("parent1:", parent1.map((node, index) => ([index, node.color])))
-        // console.log("parent2:", parent2.map((node, index) => ([index, node.color])))
-        // console.log("child1: ", child[0].map((node, index) => ([index, node.color])))
-        // console.log("child2: ", child[1].map((node, index) => ([index, node.color])))
-        newPopulation.push(child[0])
-        newPopulation.push(child[1])
+        let children = crossover(parent1, parent2)
+        console.log("parent1:", parent1.map((node, index) => ([index, node.color])))
+        console.log("parent2:", parent2.map((node, index) => ([index, node.color])))
+        console.log("child1: ", children[0].map((node, index) => ([index, node.color])))
+        console.log("child2: ", children[1].map((node, index) => ([index, node.color])))
+        newPopulation.push(children[0])
+        newPopulation.push(children[1])
     }
     return newPopulation
 }
@@ -118,29 +118,28 @@ let mutate = (population, probability) => {
 }
 
 
-
-let graphSizes = [100, 500, 1000]
-let populationSizes = [10, 20, 40, 60]
-let mutationProbabilities = [0.1, 0.3, 0.5, 0.7, 0.9]
+// let graphSizes = [100, 500, 1000]
+// let populationSizes = [10, 20, 40, 60]
+// let mutationProbabilities = [0.1, 0.3, 0.5, 0.7, 0.9]
 
 let graph = generateGraph(10)
 let population = []
-let fitness = []
+let fitnessParents = []
+let fitnessChildren = []
 
 for (let i = 0; i < 10; i++) {
     population.push(generateIndividual(graph))
-    fitness.push(calculateFitness(population[i]))
+    fitnessParents.push(calculateFitness(population[i]))
 }
 
-// console.log("Graph:", graph)
-// console.log("Population:", population)
-// console.log("Fitness:", fitness)
-console.log("Reproduce:", reproduce(population))
-console.log("Mutate:", mutate(population, 0.9))
-// reproduce(population)
+let newPopulation = reproduce(population)
 
-// Loop over all children and mutate them
+for (let i = 0; i < 10; i++) {
+    fitnessChildren.push(calculateFitness(newPopulation[i]))
+}
 
-// For each pair of parents, do the crossover and mutation, add those into new population
-// Then do a check of fitness on the population and remove the worst individuals (half)
 
+// console.log("Reproduce:", newPopulation)
+// console.log("Mutate:", mutate(population, 0.9))
+console.log("Fitness of parents:", fitnessParents)
+console.log("Fitness of children:", fitnessChildren)
