@@ -89,7 +89,7 @@ let crossover = (parent1, parent2) => {
     let point2 = Math.floor(Math.random() * parent1.length)
     let start = Math.min(point1, point2)
     let end = Math.max(point1, point2)
-    console.log("start: ", start, "end: ", end - 1)
+    // console.log("start: ", start, "end: ", end - 1)
     for (let i = start; i < end; i++) {
         child1[i].color = parent2[i].color
         child2[i].color = parent1[i].color
@@ -104,22 +104,22 @@ let reproduce = (population) => {
         let parent1 = population[i]
         let parent2 = population[(i + 1) % population.length]
         let children = crossover(parent1, parent2)
-        console.log(
-            "parent1:",
-            parent1.map((node, index) => [index, node.color])
-        )
-        console.log(
-            "parent2:",
-            parent2.map((node, index) => [index, node.color])
-        )
-        console.log(
-            "child1: ",
-            children[0].map((node, index) => [index, node.color])
-        )
-        console.log(
-            "child2: ",
-            children[1].map((node, index) => [index, node.color])
-        )
+        // console.log(
+        //     "parent1:",
+        //     parent1.map((node, index) => [index, node.color])
+        // )
+        // console.log(
+        //     "parent2:",
+        //     parent2.map((node, index) => [index, node.color])
+        // )
+        // console.log(
+        //     "child1: ",
+        //     children[0].map((node, index) => [index, node.color])
+        // )
+        // console.log(
+        //     "child2: ",
+        //     children[1].map((node, index) => [index, node.color])
+        // )
         newPopulation.push(children[0])
         newPopulation.push(children[1])
     }
@@ -142,21 +142,49 @@ let mutate = (population, probability) => {
     return newPopulation
 }
 
+// Remove half of the population with the lowest fitness
+let removeLowestFitness = (population) => {
+    let fitness = calculateFitness(population)
+    let newPopulation = []
+    let length = population.length
+    for (let i = 0; i < length / 2; i++) {
+        let maxIndex = fitness.indexOf(Math.max(...fitness))
+        newPopulation.push(population[maxIndex])
+        fitness.splice(maxIndex, 1)
+        population.splice(maxIndex, 1)
+    }
+    return newPopulation
+}
+
 let graphSize = 10
 let populationSize = 10
+let mutationProbability = 0.5
 
 let graph = generateGraph(graphSize)
 let population = generatePopulation(graph, populationSize)
 let fitnessPopulation = calculateFitness(population)
 
-console.log("Population:", population)
-console.log("Fitness:", fitnessPopulation)
+// console.log("Population:", population)
+console.log("Fitness parents:", fitnessPopulation)
 
 let newPopulation = reproduce(population)
 let fitnessNewPopulation = calculateFitness(newPopulation)
-
-console.log("New Population:", newPopulation)
+// console.log("New Population:", newPopulation)
 console.log("Fitness kids:", fitnessNewPopulation)
+
+newPopulation = mutate(newPopulation, mutationProbability)
+fitnessNewPopulation = calculateFitness(newPopulation)
+
+// console.log("New Population after mutate:", newPopulation)
+console.log("Fitness kids after mutate:", fitnessNewPopulation)
+
+
+population.push(...newPopulation)
+let fitPopulation = removeLowestFitness(population)
+// population = removeLowestFitness(population)
+console.log("Fitness after remove:", calculateFitness(fitPopulation).sort())
+// console.log(population)
+
 
 // let graphSizes = [100, 500, 1000]
 // let populationSizes = [10, 20, 40, 60]
