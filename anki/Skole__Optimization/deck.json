@@ -1,0 +1,274 @@
+{
+    "__type__": "Deck",
+    "children": [
+        {
+            "__type__": "Deck",
+            "children": [],
+            "crowdanki_uuid": "d75476a4-765d-11ed-bea4-acde48001122",
+            "deck_config_uuid": "52170fe8-9fd5-11ec-ab04-f02f74183157",
+            "desc": "",
+            "dyn": 0,
+            "extendNew": 0,
+            "extendRev": 0,
+            "media_files": [
+                "IMG_3436FA54E572-1.jpeg",
+                "IMG_8EBDEA651E41-1.jpeg",
+                "IMG_CA276D1FED5D-1.jpeg",
+                "IMG_E67B668B5C0B-1.jpeg",
+                "Screenshot 2022-12-07 at 11.44.52.png",
+                "Screenshot 2022-12-07 at 11.45.46.png"
+            ],
+            "name": "1. Transportation Problem",
+            "notes": [
+                {
+                    "__type__": "Note",
+                    "fields": [
+                        "What is the process of optimization?",
+                        "Optimization is the process by which the optimal solution to a problem is produced."
+                    ],
+                    "guid": "zkeCegtk~$",
+                    "note_model_uuid": "521c4019-9fd5-11ec-9228-f02f74183157",
+                    "tags": []
+                },
+                {
+                    "__type__": "Note",
+                    "fields": [
+                        "Can we always find the best solution?",
+                        "Ideally, we would like to obtain the perfect solution to our problem. But in the real world, we can only strive to achieve the best solution possible given the constraints of time and available funds."
+                    ],
+                    "guid": "qP@`dbkTpr",
+                    "note_model_uuid": "521c4019-9fd5-11ec-9228-f02f74183157",
+                    "tags": []
+                },
+                {
+                    "__type__": "Note",
+                    "fields": [
+                        "What are constraints?",
+                        "When trying to find a solution to an optimization problem, it is often the case that the solution should obey some conditions. The conditions are referred to as constraints."
+                    ],
+                    "guid": "v+_}=r#X#K",
+                    "note_model_uuid": "521c4019-9fd5-11ec-9228-f02f74183157",
+                    "tags": []
+                },
+                {
+                    "__type__": "Note",
+                    "fields": [
+                        "What is the objective function?",
+                        "The process of selecting the best solution from various possible solutions must be based on a prescribed criterion, which is the objective function (the desired goal)."
+                    ],
+                    "guid": "P1:N*?qT)T",
+                    "note_model_uuid": "521c4019-9fd5-11ec-9228-f02f74183157",
+                    "tags": []
+                },
+                {
+                    "__type__": "Note",
+                    "fields": [
+                        "What are paramaters and decision variables?",
+                        "Parameters are data that define the problem. Decision variables are the quantities whose numerical value will be determined in the course of obtaining the optimal solution."
+                    ],
+                    "guid": "KrRJHA6S;F",
+                    "note_model_uuid": "521c4019-9fd5-11ec-9228-f02f74183157",
+                    "tags": []
+                },
+                {
+                    "__type__": "Note",
+                    "fields": [
+                        "What two types of decision variables are there?",
+                        "Continuous (free to assume any value) and discrete (can only assume a fixed value)."
+                    ],
+                    "guid": "nC?MPLNS}<",
+                    "note_model_uuid": "521c4019-9fd5-11ec-9228-f02f74183157",
+                    "tags": []
+                },
+                {
+                    "__type__": "Note",
+                    "fields": [
+                        "Describe the transportation problem.",
+                        "The general transportation problem is concerned with distributing amounts of any commodity from any group of 'sources' to any group of destinations or 'sinks'. The data for the problem can be arranged as a matrix of costs of transferring a unit quantity<br>from source i to sink j.<br><br>The matrix can look like this (numbers inside the squares are cost).<br><img src=\"Screenshot 2022-12-07 at 11.44.52.png\"><br><br>It can also be drawn like this:<br><img src=\"Screenshot 2022-12-07 at 11.45.46.png\">"
+                    ],
+                    "guid": "w-jVHz4NF3",
+                    "note_model_uuid": "521c4019-9fd5-11ec-9228-f02f74183157",
+                    "tags": []
+                },
+                {
+                    "__type__": "Note",
+                    "fields": [
+                        "What is the Northwest Corner Method?",
+                        "The source wants to give its resoruces to the sink. Start at position [1][1] and give as many resources as you can to the first sink. Then move to the right if there are more left in the source, otherwise move one down in order to tap into the next source.<br><br>The example below shows the first two steps, then the filled out matrix.<br><img src=\"IMG_E67B668B5C0B-1.jpeg\"><br>The total cost of the example will be:&nbsp;\\((0.9*5)+(1*15)+(1.4*5)+(0.8*10)+(0.8*10)=42.5\\)."
+                    ],
+                    "guid": "LcC#|&R2^4",
+                    "note_model_uuid": "521c4019-9fd5-11ec-9228-f02f74183157",
+                    "tags": []
+                },
+                {
+                    "__type__": "Note",
+                    "fields": [
+                        "What is a drawback of the Northwest Corner Method?",
+                        "It does not take into acount the relative unit transportation costs."
+                    ],
+                    "guid": "Rd^ma.$`g}",
+                    "note_model_uuid": "521c4019-9fd5-11ec-9228-f02f74183157",
+                    "tags": []
+                },
+                {
+                    "__type__": "Note",
+                    "fields": [
+                        "What is the Least Cost Method?",
+                        "It is a method that produces less costly initial solutions than the Northwest Corner Method.&nbsp;Start by allocating the largest possible amount to the cell with the least unit cost.<br><br>Here is an example of solving a problem using the Least Cost Method:<br><img src=\"IMG_8EBDEA651E41-1.jpeg\"><br><br>The total cost of the matrix will be&nbsp;\\((0.8*15)+(0.8*5)+(0.9*5)+(1*15)+(1*5)=40.5\\)."
+                    ],
+                    "guid": "h2JX3%#.;)",
+                    "note_model_uuid": "521c4019-9fd5-11ec-9228-f02f74183157",
+                    "tags": []
+                },
+                {
+                    "__type__": "Note",
+                    "fields": [
+                        "What does the Stepping Stone Algorithm do?",
+                        "Once an initial solution has been found by one the two methods, it is desired to transform it into the optimal solution. This is achieved by the stepping stone algorithm."
+                    ],
+                    "guid": "n%QFb}^>7t",
+                    "note_model_uuid": "521c4019-9fd5-11ec-9228-f02f74183157",
+                    "tags": []
+                },
+                {
+                    "__type__": "Note",
+                    "fields": [
+                        "How does the Stepping Stone Algorithm work?",
+                        "Ask if; for each cell individually, if the allocation of one unit to those cells would reduce the total cost. This is done only for those cells which presently have no units assigned to them.<br><br>Below is an example of starting with adding 1 to [1][3]. The next would be to try [2][1], then [3][1], and [3][2].<br><img src=\"IMG_3436FA54E572-1.jpeg\"><br><br><img src=\"IMG_CA276D1FED5D-1.jpeg\"><br>The new total cost would be&nbsp;\\((0.9*5)+(1*14)+(1*1)+(1.4*6)+(0.8*9)+(0.8*10)=43.1\\). The initial solutions cost was 42.5. The new solution is more expensive, and not an ideal canditate for a new solution. Keep trying with the other empty squares."
+                    ],
+                    "guid": "H_sWu|2#DV",
+                    "note_model_uuid": "521c4019-9fd5-11ec-9228-f02f74183157",
+                    "tags": []
+                }
+            ]
+        },
+        {
+            "__type__": "Deck",
+            "children": [],
+            "crowdanki_uuid": "d754aebc-765d-11ed-bea4-acde48001122",
+            "deck_config_uuid": "52170fe8-9fd5-11ec-ab04-f02f74183157",
+            "desc": "",
+            "dyn": 0,
+            "extendNew": 0,
+            "extendRev": 0,
+            "media_files": [],
+            "name": "2. Traveling Salesman",
+            "notes": []
+        }
+    ],
+    "crowdanki_uuid": "d7545f3e-765d-11ed-bea4-acde48001122",
+    "deck_config_uuid": "52170fe8-9fd5-11ec-ab04-f02f74183157",
+    "deck_configurations": [
+        {
+            "__type__": "DeckConfig",
+            "autoplay": true,
+            "buryInterdayLearning": false,
+            "crowdanki_uuid": "52170fe8-9fd5-11ec-ab04-f02f74183157",
+            "dyn": false,
+            "interdayLearningMix": 0,
+            "lapse": {
+                "delays": [
+                    10.0
+                ],
+                "leechAction": 1,
+                "leechFails": 8,
+                "minInt": 1,
+                "mult": 0.0
+            },
+            "maxTaken": 60,
+            "name": "Default",
+            "new": {
+                "bury": false,
+                "delays": [
+                    1.0,
+                    10.0
+                ],
+                "initialFactor": 2500,
+                "ints": [
+                    1,
+                    4,
+                    0
+                ],
+                "order": 1,
+                "perDay": 500
+            },
+            "newGatherPriority": 0,
+            "newMix": 0,
+            "newPerDayMinimum": 0,
+            "newSortOrder": 0,
+            "replayq": true,
+            "rev": {
+                "bury": false,
+                "ease4": 1.3,
+                "hardFactor": 1.2,
+                "ivlFct": 1.0,
+                "maxIvl": 36500,
+                "perDay": 5000
+            },
+            "reviewOrder": 0,
+            "timer": 0
+        }
+    ],
+    "desc": "",
+    "dyn": 0,
+    "extendNew": 0,
+    "extendRev": 0,
+    "media_files": [],
+    "name": "Skole::Optimization",
+    "note_models": [
+        {
+            "__type__": "NoteModel",
+            "crowdanki_uuid": "521c4019-9fd5-11ec-9228-f02f74183157",
+            "css": ".card {\n  font-family: arial;\n  font-size: 20px;\n  text-align: center;\n  color: black;\n  background-color: white;\n}\n",
+            "flds": [
+                {
+                    "description": "",
+                    "font": "Arial",
+                    "name": "Front",
+                    "ord": 0,
+                    "rtl": false,
+                    "size": 20,
+                    "sticky": false
+                },
+                {
+                    "description": "",
+                    "font": "Arial",
+                    "name": "Back",
+                    "ord": 1,
+                    "rtl": false,
+                    "size": 20,
+                    "sticky": false
+                }
+            ],
+            "latexPost": "\\end{document}",
+            "latexPre": "\\documentclass[12pt]{article}\n\\special{papersize=3in,5in}\n\\usepackage[utf8]{inputenc}\n\\usepackage{amssymb,amsmath}\n\\pagestyle{empty}\n\\setlength{\\parindent}{0in}\n\\begin{document}\n",
+            "latexsvg": false,
+            "name": "Basic",
+            "req": [
+                [
+                    0,
+                    "any",
+                    [
+                        0
+                    ]
+                ]
+            ],
+            "sortf": 0,
+            "tmpls": [
+                {
+                    "afmt": "{{FrontSide}}\n\n<hr id=answer>\n\n{{Back}}",
+                    "bafmt": "",
+                    "bfont": "",
+                    "bqfmt": "",
+                    "bsize": 0,
+                    "did": null,
+                    "name": "Card 1",
+                    "ord": 0,
+                    "qfmt": "{{Front}}"
+                }
+            ],
+            "type": 0
+        }
+    ],
+    "notes": []
+}
